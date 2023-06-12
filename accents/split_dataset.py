@@ -10,6 +10,12 @@ FEATURES_DIR = "/home/usuaris/veussd/DATABASES/Common_Voice/cv11.0/ca/features/"
 OUTPUT_TSV_FILES = ["./"+SPLIT_NAME+"/dev.tsv", "./"+SPLIT_NAME+"/train.tsv", "./"+SPLIT_NAME+"/test.tsv"]
 INPUT_TSV_FILES = "./validated_final.tsv"
 
+
+USER_COUNT_LIMITS = 100
+CENTRAL_DROP = 0.5
+TRAIN_PROPORTION = 0.75
+
+
 DISCARDED_CLIPS = [
     "common_voice_ca_30831868.mp3",
     "common_voice_ca_17647697.mp3",
@@ -119,13 +125,13 @@ def limit_users_and_count(valid_data: pd.DataFrame):
             final_validated = pd.concat(
                 [
                     final_validated,
-                    validated[validated["continous_client_index"] == i].head(100),
+                    validated[validated["continous_client_index"] == i].head(USER_COUNT_LIMITS),
                 ],
                 sort=False,
             )
 
     final_validated = final_validated.drop(
-        final_validated[final_validated["accents"].eq("central")].sample(frac=0.5).index
+        final_validated[final_validated["accents"].eq("central")].sample(frac=CENTRAL_DROP).index
     )
     return final_validated
 
@@ -140,7 +146,7 @@ def post_process_valid_data(df_main):
 
     hparam_mse_wgt = 0.1 # must be between 0 and 1
     assert(0 <= hparam_mse_wgt <= 1)
-    train_proportion = 0.75 # must be between 0 and 1
+    train_proportion = TRAIN_PROPORTION # must be between 0 and 1
     assert(0 <= train_proportion <= 1)
     val_test_proportion = (1-train_proportion)/2
 

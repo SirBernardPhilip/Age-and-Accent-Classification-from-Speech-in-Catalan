@@ -1,7 +1,3 @@
-"""
-Module to move clips from original into accents folder
-"""
-
 import pandas as pd
 
 DATASET_DIR = "/home/usuaris/veussd/DATABASES/Common_Voice/cv11.0/ca/"
@@ -120,9 +116,6 @@ def read_and_filter(tsv_file: str) -> pd.DataFrame:
 
 
 def move_files() -> None:
-    """
-    Function to move the files from the original folder to the accents folder
-    """
     data_with_accents = read_and_filter("validated.tsv")
     print(len(data_with_accents))
     print(data_with_accents["accents"].value_counts())

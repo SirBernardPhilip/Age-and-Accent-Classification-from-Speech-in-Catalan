@@ -16,7 +16,7 @@ sys.path.append('./scripts/')
 from data import *
 from model import SpeakerClassifier
 from loss import *
-from utils import *
+from ages.misc.utils import *
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import mean_squared_error
 #from torchmetrics import ConfusionMatrix
