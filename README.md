@@ -1,4 +1,4 @@
-# Catalan Common Voice Utils
+# Age and Accent Classification from Speech in Catalan
 
 This repository contains a set of tools used during the Master's Thesis of students from the [Universitat Politècnica de Catalunya](https://www.upc.edu/ca). The thesis were centered on speaker characterization using the [Common Voice](https://commonvoice.mozilla.org/) dataset.
 
